@@ -37,7 +37,7 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="bg-card rounded-xl border border-border shadow-lg p-8">
           <h1 className="text-2xl font-bold text-text-primary mb-6 text-center">
-            Sign In to Stock Analyzer
+            Masuk ke Stock Analyzer
           </h1>
           
           {error && (
@@ -80,15 +80,15 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full py-3 px-4 bg-brand-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Masuk...' : 'Masuk'}
             </button>
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-text-secondary">
-              Do not have an account?{' '}
+              <p className="text-sm text-text-secondary">
+              Belum punya akun?{' '}
               <Link href="/register" className="text-brand-primary hover:underline font-semibold">
-                Sign Up
+                Daftar
               </Link>
             </p>
           </div>

@@ -38,14 +38,14 @@ const SavedAnalyses = ({ analyses }: SavedAnalysesProps) => {
   return (
     <div className="bg-card border border-border rounded-lg p-6 md:p-5 sm:p-4">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-5 sm:mb-4">
-        <h2 className="text-xl md:text-lg sm:text-base font-bold text-text-primary">Saved Analyses</h2>
+  <h2 className="text-xl md:text-lg sm:text-base font-bold text-text-primary">Analisis Tersimpan</h2>
         
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
           <div className="relative w-full sm:w-64">
             <Icon name="MagnifyingGlassIcon" size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-secondary" />
             <input
               type="text"
-              placeholder="Search analyses..."
+              placeholder="Cari analisis..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2 text-sm border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -57,9 +57,9 @@ const SavedAnalyses = ({ analyses }: SavedAnalysesProps) => {
             onChange={(e) => setSortBy(e.target.value as 'date' | 'score' | 'rank')}
             className="px-4 py-2 text-sm border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-surface"
           >
-            <option value="date">Sort by Date</option>
-            <option value="score">Sort by Score</option>
-            <option value="rank">Sort by Rank</option>
+            <option value="date">Urutkan berdasarkan Tanggal</option>
+            <option value="score">Urutkan berdasarkan Skor</option>
+            <option value="rank">Urutkan berdasarkan Peringkat</option>
           </select>
         </div>
       </div>
@@ -83,7 +83,7 @@ const SavedAnalyses = ({ analyses }: SavedAnalysesProps) => {
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="px-3 py-1 bg-primary/10 text-primary text-xs font-medium rounded-md whitespace-nowrap">
-                    Score: {analysis.score.toFixed(2)}
+                    Skor: {analysis.score.toFixed(2)}
                   </span>
                   <span className="px-3 py-1 bg-accent/10 text-accent text-xs font-medium rounded-md whitespace-nowrap">
                     Rank #{analysis.rank}
@@ -98,22 +98,22 @@ const SavedAnalyses = ({ analyses }: SavedAnalysesProps) => {
                   </span>
                 ))}
                 {analysis.criteria.length > 3 && (
-                  <span className="text-xs text-text-secondary">+{analysis.criteria.length - 3} more</span>
+                  <span className="text-xs text-text-secondary">+{analysis.criteria.length - 3} lainnya</span>
                 )}
               </div>
               
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <p className="text-xs text-text-secondary">
-                  Analyzed on {new Date(analysis.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  Dianalisis pada {new Date(analysis.date).toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' })}
                 </p>
                 <div className="flex items-center gap-2 w-full sm:w-auto">
                   <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-primary hover:bg-primary/10 rounded-md transition-smooth">
                     <Icon name="EyeIcon" size={16} />
-                    <span>View</span>
+                    <span>Lihat</span>
                   </button>
                   <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium text-text-secondary hover:bg-muted rounded-md transition-smooth">
                     <Icon name="ArrowDownTrayIcon" size={16} />
-                    <span>Export</span>
+                    <span>Ekspor</span>
                   </button>
                   <button className="flex items-center justify-center p-2 text-error hover:bg-error/10 rounded-md transition-smooth">
                     <Icon name="TrashIcon" size={16} />
@@ -128,7 +128,7 @@ const SavedAnalyses = ({ analyses }: SavedAnalysesProps) => {
       {filteredAnalyses.length === 0 && (
         <div className="text-center py-12 md:py-10 sm:py-8">
           <Icon name="DocumentTextIcon" size={48} className="mx-auto text-text-secondary mb-4" />
-          <p className="text-text-secondary">No analyses found matching your search</p>
+          <p className="text-text-secondary">Tidak ditemukan analisis yang cocok dengan pencarian Anda</p>
         </div>
       )}
     </div>

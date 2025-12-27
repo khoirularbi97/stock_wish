@@ -38,11 +38,11 @@ export default function RegistrationScreen() {
 
     const strengthMap: { [key: number]: PasswordStrength } = {
       0: { score: 0, label: '', color: '' },
-      1: { score: 1, label: 'Weak', color: 'bg-red-500' },
-      2: { score: 2, label: 'Fair', color: 'bg-orange-500' },
-      3: { score: 3, label: 'Good', color: 'bg-yellow-500' },
-      4: { score: 4, label: 'Strong', color: 'bg-green-500' },
-      5: { score: 5, label: 'Very Strong', color: 'bg-green-600' }
+      1: { score: 1, label: 'Lemah', color: 'bg-red-500' },
+      2: { score: 2, label: 'Cukup', color: 'bg-orange-500' },
+      3: { score: 3, label: 'Baik', color: 'bg-yellow-500' },
+      4: { score: 4, label: 'Kuat', color: 'bg-green-500' },
+      5: { score: 5, label: 'Sangat Kuat', color: 'bg-green-600' }
     };
 
     return strengthMap[score] || strengthMap[0];
@@ -59,22 +59,22 @@ export default function RegistrationScreen() {
     setError('');
 
     if (!termsAccepted) {
-      setError('Please accept the Terms of Service and Privacy Policy');
+      setError('Silakan setujui Syarat Layanan dan Kebijakan Privasi');
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('Kata sandi tidak cocok');
       return;
     }
 
     if (password.length < 8) {
-      setError('Password must be at least 8 characters long');
+      setError('Kata sandi harus minimal 8 karakter');
       return;
     }
 
     if (passwordStrength.score < 2) {
-      setError('Please use a stronger password');
+      setError('Silakan gunakan kata sandi yang lebih kuat');
       return;
     }
 
@@ -89,7 +89,7 @@ export default function RegistrationScreen() {
       
       router.push('/user-workspace');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Registration failed. Please try again.');
+      setError(err instanceof Error ? err.message : 'Pendaftaran gagal. Silakan coba lagi.');
     } finally {
       setLoading(false);
     }
@@ -107,10 +107,10 @@ export default function RegistrationScreen() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-white mb-1">
-              Join StockWise Analytics
+              Bergabung dengan StockWise Analytics
             </h1>
             <p className="text-green-50 text-sm">
-              Create your account to access personalized stock analysis
+              Buat akun Anda untuk mengakses analisis saham yang dipersonalisasi
             </p>
           </div>
 
@@ -129,7 +129,7 @@ export default function RegistrationScreen() {
               {/* Email Field */}
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address
+                  Alamat Email
                 </label>
                 <input
                   id="email"
@@ -146,7 +146,7 @@ export default function RegistrationScreen() {
               {/* Password Field */}
               <div>
                 <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Password
+                  Kata Sandi
                 </label>
                 <div className="relative">
                   <input
@@ -155,7 +155,7 @@ export default function RegistrationScreen() {
                     value={password}
                     onChange={handlePasswordChange}
                     className="w-full px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] focus:border-transparent transition-all"
-                    placeholder="Create a strong password"
+                    placeholder="Buat kata sandi yang kuat"
                     required
                     disabled={loading}
                     minLength={8}
@@ -194,13 +194,13 @@ export default function RegistrationScreen() {
                     </div>
                     <ul className="text-xs text-gray-600 space-y-1">
                       <li className={password.length >= 8 ? 'text-green-600' : ''}>
-                        • At least 8 characters
+                        • Minimal 8 karakter
                       </li>
                       <li className={/[a-z]/.test(password) && /[A-Z]/.test(password) ? 'text-green-600' : ''}>
-                        • Upper and lowercase letters
+                        • Huruf besar dan kecil
                       </li>
                       <li className={/\d/.test(password) ? 'text-green-600' : ''}>
-                        • At least one number
+                        • Minimal satu angka
                       </li>
                     </ul>
                   </div>
@@ -210,7 +210,7 @@ export default function RegistrationScreen() {
               {/* Confirm Password Field */}
               <div>
                 <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-700 mb-2">
-                  Confirm Password
+                  Konfirmasi Kata Sandi
                 </label>
                 <div className="relative">
                   <input
@@ -242,14 +242,14 @@ export default function RegistrationScreen() {
                   </button>
                 </div>
                 {confirmPassword && password !== confirmPassword && (
-                  <p className="mt-1 text-xs text-red-600">Passwords do not match</p>
+                  <p className="mt-1 text-xs text-red-600">Kata sandi tidak cocok</p>
                 )}
                 {confirmPassword && password === confirmPassword && (
                   <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                     </svg>
-                    Passwords match
+                    Kata sandi cocok
                   </p>
                 )}
               </div>
@@ -265,13 +265,13 @@ export default function RegistrationScreen() {
                   disabled={loading}
                 />
                 <label htmlFor="terms" className="text-sm text-gray-700">
-                  I agree to the{' '}
+                  Saya menyetujui{' '}
                   <Link href="/terms" className="text-[#2E8B57] hover:underline font-medium">
-                    Terms of Service
+                    Syarat Layanan
                   </Link>
-                  {' '}and{' '}
+                  {' '}dan{' '}
                   <Link href="/privacy" className="text-[#2E8B57] hover:underline font-medium">
-                    Privacy Policy
+                    Kebijakan Privasi
                   </Link>
                 </label>
               </div>
@@ -288,10 +288,10 @@ export default function RegistrationScreen() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Creating Account...
+                    Membuat Akun...
                   </span>
                 ) : (
-                  'Create Account'
+                  'Buat Akun'
                 )}
               </button>
             </form>
@@ -303,26 +303,26 @@ export default function RegistrationScreen() {
                   <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
                   </svg>
-                  <span>SSL Secured</span>
+                  <span>SSL Aman</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" />
                   </svg>
-                  <span>Data Protected</span>
+                  <span>Data Dilindungi</span>
                 </div>
               </div>
             </div>
 
             {/* Sign In Link */}
             <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">
-                Already have an account?{' '}
+                <p className="text-sm text-gray-600">
+                Sudah punya akun?{' '}
                 <Link 
                   href="/login-screen" 
                   className="text-[#2E8B57] hover:underline font-semibold"
                 >
-                  Sign In
+                  Masuk
                 </Link>
               </p>
             </div>

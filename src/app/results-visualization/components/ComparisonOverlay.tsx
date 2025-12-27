@@ -25,14 +25,14 @@ const ComparisonOverlay = ({ stocks, onToggleStock }: ComparisonOverlayProps) =>
         className="flex items-center gap-2 px-4 md:px-3 sm:px-2 py-2 md:py-1.5 sm:py-1 bg-surface border border-border rounded-md hover:bg-muted transition-smooth text-sm md:text-xs font-medium whitespace-nowrap"
       >
         <Icon name="AdjustmentsHorizontalIcon" size={18} />
-        <span>Compare Stocks</span>
+        <span>Bandingkan Saham</span>
       </button>
 
       {isOpen && (
         <div className="absolute right-0 top-full mt-2 w-64 md:w-56 sm:w-48 bg-popover border border-border rounded-lg shadow-xl z-50 animate-scale-in">
           <div className="p-4 md:p-3 sm:p-2 border-b border-border">
             <div className="flex items-center justify-between">
-              <h3 className="text-base md:text-sm font-semibold text-text-primary">Stock Comparison</h3>
+              <h3 className="text-base md:text-sm font-semibold text-text-primary">Perbandingan Saham</h3>
               <button
                 onClick={() => setIsOpen(false)}
                 className="p-1 hover:bg-muted rounded transition-smooth"

@@ -30,8 +30,8 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
         type: 'price',
         severity: 'high',
         symbol: 'ANTM',
-        title: 'Price Alert Triggered',
-        message: 'ANTM reached target price of $1,920. Consider reviewing position.',
+        title: 'Peringatan Harga Tercapai',
+        message: 'ANTM mencapai harga target $1.920. Pertimbangkan untuk meninjau posisi.',
         timestamp: '2025-12-20T05:30:00'
       },
       {
@@ -39,8 +39,8 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
         type: 'volume',
         severity: 'medium',
         symbol: 'BBCA',
-        title: 'Volume Spike Detected',
-        message: 'BBCA trading volume increased by 45% above average.',
+        title: 'Lonjakan Volume Terdeteksi',
+        message: 'Volume perdagangan BBCA meningkat 45% di atas rata-rata.',
         timestamp: '2025-12-20T04:15:00'
       },
       {
@@ -48,8 +48,8 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
         type: 'technical',
         severity: 'medium',
         symbol: 'TLKM',
-        title: 'Technical Indicator Signal',
-        message: 'TLKM RSI indicates oversold condition at 28.5.',
+        title: 'Sinyal Indikator Teknis',
+        message: 'RSI TLKM menunjukkan kondisi oversold pada 28.5.',
         timestamp: '2025-12-20T03:45:00'
       },
       {
@@ -57,8 +57,8 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
         type: 'news',
         severity: 'low',
         symbol: 'ANTM',
-        title: 'Market News Update',
-        message: 'Commodity prices showing positive momentum in Asian markets.',
+        title: 'Pembaruan Berita Pasar',
+        message: 'Harga komoditas menunjukkan momentum positif di pasar Asia.',
         timestamp: '2025-12-20T02:30:00'
       }
     ];
@@ -92,10 +92,10 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
     const diffMs = now.getTime() - date.getTime();
     const diffMins = Math.floor(diffMs / 60000);
     
-    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffMins < 60) return `${diffMins}m yang lalu`;
     const diffHours = Math.floor(diffMins / 60);
-    if (diffHours < 24) return `${diffHours}h ago`;
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    if (diffHours < 24) return `${diffHours}j yang lalu`;
+    return date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
   };
 
   if (!isHydrated) {
@@ -116,10 +116,10 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
   return (
     <div className={`bg-card border border-border rounded-lg p-8 md:p-6 sm:p-4 ${className}`}>
       <div className="flex items-center justify-between mb-6 md:mb-4 sm:mb-3">
-        <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Market Alerts</h2>
+        <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Peringatan Pasar</h2>
         <div className="flex items-center gap-2">
           <span className="px-3 md:px-2 py-1 bg-error/10 text-error text-xs font-medium rounded-full whitespace-nowrap">
-            {alerts.filter(a => a.severity === 'high').length} High
+            {alerts.filter(a => a.severity === 'high').length} Tinggi
           </span>
           <Icon name="BellIcon" size={24} className="text-primary" />
         </div>
@@ -152,7 +152,7 @@ const MarketAlerts = ({ className = '' }: MarketAlertsProps) => {
 
       <div className="mt-6 md:mt-4 sm:mt-3 pt-6 md:pt-4 sm:pt-3 border-t border-border">
         <button className="w-full px-4 py-2 text-sm md:text-xs font-medium text-primary hover:bg-primary/5 rounded-md transition-smooth">
-          View All Alerts
+          Lihat Semua Peringatan
         </button>
       </div>
     </div>

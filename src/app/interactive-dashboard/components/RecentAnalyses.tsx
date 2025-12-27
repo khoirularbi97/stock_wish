@@ -95,14 +95,14 @@ const RecentAnalyses = ({ className = '' }: RecentAnalysesProps) => {
   const formatDate = (dateString: string) => {
     if (!isHydrated) return '';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    return date.toLocaleDateString('id-ID', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
   if (!isHydrated) {
     return (
       <div className={`bg-card border border-border rounded-lg p-8 md:p-6 sm:p-4 ${className}`}>
         <div className="flex items-center justify-between mb-6 md:mb-4 sm:mb-3">
-          <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Recent Analyses</h2>
+          <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Analisis Terbaru</h2>
         </div>
         <div className="animate-pulse space-y-3">
           <div className="h-20 bg-muted rounded"></div>
@@ -116,9 +116,9 @@ const RecentAnalyses = ({ className = '' }: RecentAnalysesProps) => {
   return (
     <div className={`bg-card border border-border rounded-lg p-8 md:p-6 sm:p-4 ${className}`}>
       <div className="flex items-center justify-between mb-6 md:mb-4 sm:mb-3">
-        <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Recent Analyses</h2>
+        <h2 className="text-xl md:text-lg sm:text-base font-semibold text-text-primary">Analisis Terbaru</h2>
         <Link href="/user-workspace" className="text-sm md:text-xs font-medium text-primary hover:underline">
-          View All
+          Lihat Semua
         </Link>
       </div>
 
@@ -138,7 +138,7 @@ const RecentAnalyses = ({ className = '' }: RecentAnalysesProps) => {
                     {analysis.title}
                   </h3>
                   <span className={`px-2 py-1 text-xs font-medium rounded-full whitespace-nowrap flex-shrink-0 ${getStatusColor(analysis.status)}`}>
-                    {analysis.status === 'in-progress' ? 'In Progress' : analysis.status.charAt(0).toUpperCase() + analysis.status.slice(1)}
+                    {analysis.status === 'in-progress' ? 'Sedang Berjalan' : analysis.status === 'completed' ? 'Selesai' : 'Draft'}
                   </span>
                 </div>
                 
@@ -154,7 +154,7 @@ const RecentAnalyses = ({ className = '' }: RecentAnalysesProps) => {
                   <span className="text-xs text-text-secondary whitespace-nowrap">{formatDate(analysis.date)}</span>
                   {analysis.score && (
                     <div className="flex items-center gap-2 md:gap-1">
-                      <span className="text-xs text-text-secondary">Score:</span>
+                      <span className="text-xs text-text-secondary">Skor:</span>
                       <span className="text-sm md:text-xs font-semibold text-success whitespace-nowrap">{analysis.score.toFixed(1)}</span>
                     </div>
                   )}
@@ -171,7 +171,7 @@ const RecentAnalyses = ({ className = '' }: RecentAnalysesProps) => {
           className="flex items-center justify-center gap-2 w-full px-4 py-3 md:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs rounded-md hover:opacity-90 transition-smooth"
         >
           <Icon name="PlusIcon" size={20} />
-          <span>New Analysis</span>
+          <span>Analisis Baru</span>
         </Link>
       </div>
     </div>

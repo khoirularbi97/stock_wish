@@ -49,9 +49,9 @@ const CustomCriteria = ({ criteria: initialCriteria }: CustomCriteriaProps) => {
     <div className="bg-card border border-border rounded-lg p-6 md:p-5 sm:p-4">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 md:mb-5 sm:mb-4">
         <div>
-          <h2 className="text-xl md:text-lg sm:text-base font-bold text-text-primary mb-1">Custom Criteria Sets</h2>
+          <h2 className="text-xl md:text-lg sm:text-base font-bold text-text-primary mb-1">Set Kriteria Kustom</h2>
           <p className="text-sm text-text-secondary">
-            Total Weight: <span className={`font-semibold ${totalWeight === 100 ? 'text-success' : 'text-warning'}`}>{totalWeight}%</span>
+            Total Bobot: <span className={`font-semibold ${totalWeight === 100 ? 'text-success' : 'text-warning'}`}>{totalWeight}%</span>
           </p>
         </div>
         <button
@@ -59,17 +59,17 @@ const CustomCriteria = ({ criteria: initialCriteria }: CustomCriteriaProps) => {
           className="w-full sm:w-auto flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white text-sm font-medium rounded-md hover:opacity-90 transition-smooth"
         >
           <Icon name={isAddingNew ? 'XMarkIcon' : 'PlusIcon'} size={18} />
-          <span>{isAddingNew ? 'Cancel' : 'Add Criterion'}</span>
+          <span>{isAddingNew ? 'Batal' : 'Tambah Kriteria'}</span>
         </button>
       </div>
 
       {isAddingNew && (
         <div className="mb-6 md:mb-5 sm:mb-4 p-4 md:p-3 sm:p-2 bg-muted rounded-lg">
-          <h3 className="text-sm font-semibold text-text-primary mb-3">New Criterion</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-3">Kriteria Baru</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             <input
               type="text"
-              placeholder="Criterion name"
+              placeholder="Nama kriteria"
               value={newCriterion.name}
               onChange={(e) => setNewCriterion(prev => ({ ...prev, name: e.target.value }))}
               className="px-3 py-2 text-sm border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
@@ -79,14 +79,14 @@ const CustomCriteria = ({ criteria: initialCriteria }: CustomCriteriaProps) => {
               onChange={(e) => setNewCriterion(prev => ({ ...prev, category: e.target.value }))}
               className="px-3 py-2 text-sm border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-surface"
             >
-              <option value="Financial">Financial</option>
-              <option value="Technical">Technical</option>
-              <option value="Market">Market</option>
-              <option value="Risk">Risk</option>
+              <option value="Financial">Keuangan</option>
+              <option value="Technical">Teknis</option>
+              <option value="Market">Pasar</option>
+              <option value="Risk">Risiko</option>
             </select>
             <input
               type="number"
-              placeholder="Weight %"
+              placeholder="Bobot %"
               min="0"
               max="100"
               value={newCriterion.weight || ''}
@@ -97,7 +97,7 @@ const CustomCriteria = ({ criteria: initialCriteria }: CustomCriteriaProps) => {
               onClick={addNewCriterion}
               className="px-4 py-2 bg-success text-white text-sm font-medium rounded-md hover:opacity-90 transition-smooth"
             >
-              Add
+              Tambah
             </button>
           </div>
         </div>
@@ -144,7 +144,7 @@ const CustomCriteria = ({ criteria: initialCriteria }: CustomCriteriaProps) => {
         <div className="mt-4 p-3 bg-warning/10 border border-warning/20 rounded-lg flex items-start gap-2">
           <Icon name="ExclamationTriangleIcon" size={18} className="text-warning flex-shrink-0 mt-0.5" />
           <p className="text-sm text-warning">
-            Total weight must equal 100% for accurate analysis. Current total: {totalWeight}%
+            Total bobot harus sama dengan 100% untuk analisis yang akurat. Total saat ini: {totalWeight}%
           </p>
         </div>
       )}

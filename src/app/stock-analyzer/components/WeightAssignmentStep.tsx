@@ -35,11 +35,11 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
   const [activeComparison, setActiveComparison] = useState<{ row: number; col: number } | null>(null);
 
   const comparisonScale = [
-    { value: 9, label: 'Extremely More Important' },
-    { value: 7, label: 'Very Strongly More Important' },
-    { value: 5, label: 'Strongly More Important' },
-    { value: 3, label: 'Moderately More Important' },
-    { value: 1, label: 'Equally Important' },
+    { value: 9, label: 'Jauh lebih penting' },
+    { value: 7, label: 'Sangat lebih penting' },
+    { value: 5, label: 'Lebih penting' },
+    { value: 3, label: 'Agak lebih penting' },
+    { value: 1, label: 'Sama penting' },
   ];
 
   const calculateAHPWeights = () => {
@@ -118,7 +118,7 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
   const handleNext = () => {
     const total = weightedCriteria.reduce((sum, c) => sum + c.weight, 0);
     if (Math.abs(total - 100) > 1) {
-      alert('Total weight must equal 100%. Click "Normalize Weights" to auto-adjust.');
+      alert('Total bobot harus sama dengan 100%. Klik "Normalisasi Bobot" untuk menyesuaikan secara otomatis.');
       return;
     }
     onNext(weightedCriteria);
@@ -132,10 +132,10 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-3">
         <div>
           <h2 className="text-2xl md:text-xl sm:text-lg font-semibold text-text-primary">
-            Assign Criteria Weights
+            Tetapkan Bobot Kriteria
           </h2>
           <p className="text-sm md:text-xs text-text-secondary mt-1">
-            Define importance of each criterion (total must equal 100%)
+            Tentukan tingkat kepentingan setiap kriteria (total harus sama dengan 100%)
           </p>
         </div>
         <div className="flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-lg">
@@ -155,19 +155,19 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
       </div>
 
       <div className="flex flex-wrap gap-3 md:gap-2 sm:gap-2">
-        <button
+                <button
           onClick={() => setShowAHPMatrix(true)}
           className="flex items-center gap-2 px-5 md:px-4 sm:px-3 py-2 md:py-2 sm:py-2 bg-brand-primary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth shadow-md"
         >
           <Icon name="CalculatorIcon" size={18} />
-          <span>Calculate AHP Weights</span>
+          <span>Hitung Bobot AHP</span>
         </button>
         <button
           onClick={normalizeWeights}
           className="flex items-center gap-2 px-5 md:px-4 sm:px-3 py-2 md:py-2 sm:py-2 bg-secondary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth"
         >
           <Icon name="AdjustmentsHorizontalIcon" size={18} />
-          <span>Normalize Weights</span>
+          <span>Normalisasi Bobot</span>
         </button>
       </div>
 
@@ -215,13 +215,15 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
             </div>
 
             {criterion.ahpScore > 0 && (
+            
               <div className="mt-3 pt-3 border-t border-border">
                 <div className="flex items-center gap-2 text-xs text-text-secondary">
                   <Icon name="InformationCircleIcon" size={16} />
-                  <span>AHP Calculated Score: {(criterion.ahpScore * 100).toFixed(2)}%</span>
+                  <span>Skor AHP Terkalkulasi: {(criterion.ahpScore * 100).toFixed(2)}%</span>
                 </div>
               </div>
             )}
+          
           </div>
         ))}
       </div>
@@ -232,7 +234,7 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
             <div className="sticky top-0 bg-card border-b border-border px-6 md:px-5 sm:px-4 py-4 md:py-3 sm:py-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary">
-                  AHP Pairwise Comparison Matrix
+                  Matriks Perbandingan Berpasangan AHP
                 </h3>
                 <button
                   onClick={() => setShowAHPMatrix(false)}
@@ -245,16 +247,16 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
 
             <div className="p-6 md:p-5 sm:p-4 space-y-4 md:space-y-3 sm:space-y-3">
               <p className="text-sm md:text-xs sm:text-xs text-text-secondary">
-                Compare each pair of criteria using the scale below. The system will calculate optimal weights using the Analytic Hierarchy Process (AHP) methodology.
+                Bandingkan setiap pasangan kriteria menggunakan skala di bawah. Sistem akan menghitung bobot optimal menggunakan metodologi Analytic Hierarchy Process (AHP).
               </p>
 
               <div className="flex items-center justify-center">
-                <button
+                  <button
                   onClick={calculateAHPWeights}
                   className="flex items-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth shadow-md"
                 >
                   <Icon name="CalculatorIcon" size={18} />
-                  <span>Calculate Weights</span>
+                  <span>Hitung Bobot</span>
                 </button>
               </div>
             </div>
@@ -268,14 +270,14 @@ const WeightAssignmentStep = ({ criteria, onNext, onBack }: WeightAssignmentStep
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-muted text-text-primary font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:bg-muted/80 transition-smooth"
         >
           <Icon name="ArrowLeftIcon" size={18} />
-          <span>Back to Criteria</span>
+          <span>Kembali ke Kriteria</span>
         </button>
         <button
           onClick={handleNext}
           disabled={!isValid}
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth shadow-md"
         >
-          <span>Continue to Stock Data</span>
+          <span>Lanjut ke Data Saham</span>
           <Icon name="ArrowRightIcon" size={18} />
         </button>
       </div>

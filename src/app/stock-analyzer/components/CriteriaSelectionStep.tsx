@@ -19,57 +19,57 @@ const CriteriaSelectionStep = ({ onNext }: CriteriaSelectionStepProps) => {
   const [criteria, setCriteria] = useState<Criterion[]>([
     {
       id: 'roe',
-      name: 'Return on Equity (ROE)',
-      description: 'Measures profitability by revealing how much profit a company generates with shareholders\' equity',
+      name: 'Pengembalian atas Ekuitas (ROE)',
+      description: "Mengukur profitabilitas dengan menunjukkan seberapa banyak laba yang dihasilkan perusahaan dari ekuitas pemegang saham",
       category: 'profitability',
       selected: true,
     },
     {
       id: 'npm',
-      name: 'Net Profit Margin (NPM)',
-      description: 'Shows percentage of revenue that translates into profit after all expenses',
+      name: 'Margin Laba Bersih (NPM)',
+      description: 'Menunjukkan persentase pendapatan yang menjadi laba setelah semua beban',
       category: 'profitability',
       selected: true,
     },
     {
       id: 'roa',
-      name: 'Return on Assets (ROA)',
-      description: 'Indicates how efficiently a company uses its assets to generate profit',
+      name: 'Pengembalian atas Aset (ROA)',
+      description: 'Menunjukkan seberapa efisien perusahaan menggunakan asetnya untuk menghasilkan laba',
       category: 'profitability',
       selected: false,
     },
     {
       id: 'cr',
-      name: 'Current Ratio (CR)',
-      description: 'Measures ability to pay short-term obligations with current assets',
+      name: 'Rasio Lancar (CR)',
+      description: 'Mengukur kemampuan memenuhi kewajiban jangka pendek dengan aset lancar',
       category: 'liquidity',
       selected: true,
     },
     {
       id: 'qr',
-      name: 'Quick Ratio (QR)',
-      description: 'Tests ability to meet short-term obligations with most liquid assets',
+      name: 'Rasio Cepat (QR)',
+      description: 'Mengukur kemampuan memenuhi kewajiban jangka pendek menggunakan aset paling likuid',
       category: 'liquidity',
       selected: false,
     },
     {
       id: 'der',
-      name: 'Debt to Equity Ratio (DER)',
-      description: 'Compares total liabilities to shareholder equity to assess financial leverage',
+      name: 'Rasio Hutang terhadap Ekuitas (DER)',
+      description: 'Membandingkan total kewajiban dengan ekuitas pemegang saham untuk menilai leverage keuangan',
       category: 'solvency',
       selected: true,
     },
     {
       id: 'ato',
-      name: 'Asset Turnover (ATO)',
-      description: 'Measures efficiency of using assets to generate sales revenue',
+      name: 'Perputaran Aset (ATO)',
+      description: 'Mengukur efisiensi penggunaan aset untuk menghasilkan pendapatan penjualan',
       category: 'efficiency',
       selected: false,
     },
     {
       id: 'ito',
-      name: 'Inventory Turnover (ITO)',
-      description: 'Shows how many times inventory is sold and replaced over a period',
+      name: 'Perputaran Persediaan (ITO)',
+      description: 'Menunjukkan berapa kali persediaan terjual dan diganti selama suatu periode',
       category: 'efficiency',
       selected: false,
     },
@@ -90,17 +90,17 @@ const CriteriaSelectionStep = ({ onNext }: CriteriaSelectionStepProps) => {
   const handleNext = () => {
     const selected = criteria.filter(c => c.selected);
     if (selected.length < 3) {
-      alert('Please select at least 3 criteria for meaningful analysis');
+      alert('Silakan pilih minimal 3 kriteria untuk analisis yang bermakna');
       return;
     }
     onNext(selected);
   };
 
   const categories = [
-    { id: 'profitability', name: 'Profitability Ratios', icon: 'ChartBarIcon' },
-    { id: 'liquidity', name: 'Liquidity Ratios', icon: 'CurrencyDollarIcon' },
-    { id: 'solvency', name: 'Solvency Ratios', icon: 'ScaleIcon' },
-    { id: 'efficiency', name: 'Efficiency Ratios', icon: 'ArrowPathIcon' },
+    { id: 'profitability', name: 'Rasio Profitabilitas', icon: 'ChartBarIcon' },
+    { id: 'liquidity', name: 'Rasio Likuiditas', icon: 'CurrencyDollarIcon' },
+    { id: 'solvency', name: 'Rasio Solvabilitas', icon: 'ScaleIcon' },
+    { id: 'efficiency', name: 'Rasio Efisiensi', icon: 'ArrowPathIcon' },
   ];
 
   const selectedCount = criteria.filter(c => c.selected).length;
@@ -110,16 +110,16 @@ const CriteriaSelectionStep = ({ onNext }: CriteriaSelectionStepProps) => {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-3">
         <div>
           <h2 className="text-2xl md:text-xl sm:text-lg font-semibold text-text-primary">
-            Select Analysis Criteria
+            Pilih Kriteria Analisis
           </h2>
           <p className="text-sm md:text-xs text-text-secondary mt-1">
-            Choose financial ratios to evaluate stocks (minimum 3 required)
+            Pilih rasio keuangan untuk mengevaluasi saham (minimal 3 diperlukan)
           </p>
         </div>
-        <div className="flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-lg">
+          <div className="flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-lg">
           <Icon name="CheckCircleIcon" size={20} className="text-brand-primary" />
           <span className="text-sm font-semibold text-brand-primary whitespace-nowrap">
-            {selectedCount} Selected
+            {selectedCount} Dipilih
           </span>
         </div>
       </div>
@@ -146,7 +146,7 @@ const CriteriaSelectionStep = ({ onNext }: CriteriaSelectionStepProps) => {
                       {category.name}
                     </h3>
                     <p className="text-xs text-text-secondary">
-                      {selectedInCategory} of {categoryCriteria.length} selected
+                      {selectedInCategory} dari {categoryCriteria.length} dipilih
                     </p>
                   </div>
                 </div>
@@ -193,7 +193,7 @@ const CriteriaSelectionStep = ({ onNext }: CriteriaSelectionStepProps) => {
           disabled={selectedCount < 3}
           className="flex items-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth shadow-md"
         >
-          <span>Continue to Weight Assignment</span>
+          <span>Lanjut ke Penetapan Bobot</span>
           <Icon name="ArrowRightIcon" size={18} />
         </button>
       </div>

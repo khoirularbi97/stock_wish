@@ -1,6 +1,6 @@
 'use client';
 
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { useState } from 'react';
 import Icon from '@/components/ui/AppIcon';
 
@@ -46,7 +46,7 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-text-primary">Performance Visualization</h3>
+        <h3 className="text-lg font-semibold text-text-primary">Visualisasi Kinerja</h3>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setChartType('bar')}
@@ -55,7 +55,7 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
             }`}
           >
             <Icon name="ChartBarIcon" size={18} />
-            <span className="hidden sm:inline">Bar Chart</span>
+            <span className="hidden sm:inline">Diagram Batang</span>
           </button>
           <button
             onClick={() => setChartType('radar')}
@@ -64,7 +64,7 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
             }`}
           >
             <Icon name="ChartPieIcon" size={18} />
-            <span className="hidden sm:inline">Radar Chart</span>
+            <span className="hidden sm:inline">Diagram Radar</span>
           </button>
         </div>
       </div>
@@ -82,7 +82,7 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
               <YAxis 
                 stroke="#718096"
                 style={{ fontSize: '14px' }}
-                label={{ value: 'Total Score', angle: -90, position: 'insideLeft', style: { fill: '#718096' } }}
+                label={{ value: 'Skor Total', angle: -90, position: 'insideLeft', style: { fill: '#718096' } }}
               />
               <Tooltip
                 contentStyle={{
@@ -99,11 +99,11 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
               />
               <Bar 
                 dataKey="score" 
-                name="Total Score"
+                name="Skor Total"
                 radius={[8, 8, 0, 0]}
               >
                 {barChartData.map((entry, index) => (
-                  <Bar key={`bar-${index}`} fill={getBarColor(entry.rank)} />
+                  <Cell key={`cell-${index}`} fill={getBarColor(entry.rank)} />
                 ))}
               </Bar>
             </BarChart>
@@ -122,7 +122,7 @@ export default function ComparisonChart({ comparisons }: ComparisonChartProps) {
                 style={{ fontSize: '12px' }}
               />
               <Radar
-                name="Total Score"
+                name="Skor Total"
                 dataKey="score"
                 stroke="#2E8B57"
                 fill="#2E8B57"

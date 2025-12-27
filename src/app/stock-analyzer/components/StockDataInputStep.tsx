@@ -16,6 +16,7 @@ interface StockData {
   name: string;
   logo: string;
   sector: string;
+  // values can be missing for unfilled inputs; presence of a numeric value means filled
   values: { [criterionId: string]: number };
 }
 
@@ -57,16 +58,22 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
   const [showAddStock, setShowAddStock] = useState(false);
 
   const handleValueChange = (stockId: string, criterionId: string, value: string) => {
-    const numValue = parseFloat(value) || 0;
     setStocks(prev =>
-      prev.map(stock =>
-        stock.id === stockId
-          ? {
-              ...stock,
-              values: { ...stock.values, [criterionId]: numValue },
-            }
-          : stock
-      )
+      prev.map(stock => {
+        if (stock.id !== stockId) return stock;
+
+        // if the input is cleared, remove the key so it's considered unfilled
+        if (value === '') {
+          const newValues = { ...stock.values } as { [key: string]: number };
+          delete (newValues as any)[criterionId];
+          return { ...stock, values: newValues };
+        }
+
+        const parsed = parseFloat(value);
+        const numValue = Number.isNaN(parsed) ? 0 : parsed;
+
+        return { ...stock, values: { ...stock.values, [criterionId]: numValue } };
+      })
     );
   };
 
@@ -111,7 +118,8 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
           ? {
               ...stock,
               values: criteria.reduce((acc, c) => {
-                acc[c.id] = data[c.id] || 0;
+                // use nullish coalescing so explicit 0 is preserved
+                acc[c.id] = (data as any)[c.id] ?? 0;
                 return acc;
               }, {} as { [key: string]: number }),
             }
@@ -121,11 +129,27 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
   };
 
   const handleNext = () => {
+    // consider a value "filled" when the key exists and is a number (0 is a valid value)
     const allFilled = stocks.every(stock =>
-      criteria.every(c => stock.values[c.id] !== undefined && stock.values[c.id] !== 0)
+      criteria.every(c => typeof stock.values[c.id] === 'number' && !Number.isNaN(stock.values[c.id]))
     );
 
     if (!allFilled) {
+      // Diagnostic logging to help identify which stock/criterion is missing or invalid
+      try {
+        console.groupCollapsed && console.groupCollapsed('StockDataInputStep: validation failed');
+        console.log('criteria.ids:', criteria.map(c => c.id));
+        console.log('stocks overview:');
+        stocks.forEach(stock => {
+          const presentKeys = Object.keys(stock.values);
+          const details = criteria.map(c => ({ id: c.id, present: presentKeys.includes(c.id), value: stock.values[c.id] }));
+          console.log(stock.id, { presentKeys, details });
+        });
+        console.groupEnd && console.groupEnd();
+      } catch (e) {
+        // ignore logging errors
+      }
+
       alert('Please fill in all financial data for all stocks or use "Load Sample Data"');
       return;
     }
@@ -140,25 +164,79 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-3">
         <div>
           <h2 className="text-2xl md:text-xl sm:text-lg font-semibold text-text-primary">
-            Input Stock Financial Data
+            Masukkan Data Keuangan Saham
           </h2>
           <p className="text-sm md:text-xs text-text-secondary mt-1">
-            Enter financial ratios for each stock or load sample data
+            Masukkan rasio keuangan untuk setiap saham atau muat data contoh
           </p>
         </div>
-        <button
-          onClick={() => setShowAddStock(true)}
-          className="flex items-center gap-2 px-5 md:px-4 sm:px-3 py-2 md:py-2 sm:py-2 bg-brand-primary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth shadow-md whitespace-nowrap"
-        >
-          <Icon name="PlusIcon" size={18} />
-          <span>Add Stock</span>
-        </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setShowAddStock(true)}
+              className="flex items-center gap-2 px-4 md:px-3 sm:px-3 py-2 md:py-2 sm:py-2 bg-brand-primary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth shadow-md whitespace-nowrap"
+            >
+              <Icon name="PlusIcon" size={18} />
+              <span>Tambah Saham</span>
+            </button>
+
+            <button
+              onClick={() => {
+                // load sample for all stocks
+                const sampleData: { [key: string]: { [criterionId: string]: number } } = {
+                  antm: {
+                    roe: 15.2,
+                    npm: 12.8,
+                    roa: 8.5,
+                    cr: 2.1,
+                    qr: 1.5,
+                    der: 0.65,
+                    ato: 1.2,
+                    ito: 4.5,
+                  },
+                  bbca: {
+                    roe: 18.5,
+                    npm: 35.2,
+                    roa: 3.2,
+                    cr: 1.8,
+                    qr: 1.2,
+                    der: 4.8,
+                    ato: 0.15,
+                    ito: 0,
+                  },
+                  tlkm: {
+                    roe: 16.8,
+                    npm: 18.5,
+                    roa: 9.2,
+                    cr: 1.5,
+                    qr: 1.1,
+                    der: 1.2,
+                    ato: 0.8,
+                    ito: 12.5,
+                  },
+                };
+
+                setStocks(prev =>
+                  prev.map(stock => ({
+                    ...stock,
+                    values: criteria.reduce((acc, c) => {
+                      acc[c.id] = (sampleData as any)[stock.id]?.[c.id] ?? 0;
+                      return acc;
+                    }, {} as { [key: string]: number }),
+                  }))
+                );
+              }}
+              className="flex items-center gap-2 px-4 md:px-3 sm:px-3 py-2 md:py-2 sm:py-2 bg-secondary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth"
+            >
+              <Icon name="ArrowDownTrayIcon" size={16} />
+              <span>Muat Semua Data Contoh</span>
+            </button>
+          </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-5 sm:gap-4">
         <div className="lg:col-span-1 space-y-3 md:space-y-2 sm:space-y-2">
           <h3 className="text-sm md:text-xs font-semibold text-text-primary px-2">
-            Select Stock
+            Pilih Saham
           </h3>
           <div className="space-y-2 md:space-y-2 sm:space-y-1">
             {stocks.map(stock => (
@@ -173,7 +251,7 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
                 <div className="w-12 h-12 md:w-10 md:h-10 sm:w-10 sm:h-10 rounded-lg overflow-hidden flex-shrink-0">
                   <AppImage
                     src={stock.logo}
-                    alt={`${stock.name} company logo with ${stock.sector.toLowerCase()} industry branding`}
+                    alt={`${stock.name} logo perusahaan dengan branding industri ${stock.sector.toLowerCase()}`}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -222,7 +300,7 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
                   className="flex items-center gap-2 px-4 md:px-3 sm:px-3 py-2 md:py-2 sm:py-2 bg-secondary text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth whitespace-nowrap"
                 >
                   <Icon name="ArrowDownTrayIcon" size={16} />
-                  <span>Load Sample Data</span>
+                  <span>Muat Data Contoh</span>
                 </button>
               </div>
 
@@ -239,9 +317,9 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
                       <input
                         type="number"
                         step="0.01"
-                        value={activeStockData.values[criterion.id] || ''}
+                        value={activeStockData.values[criterion.id] ?? ''}
                         onChange={e => handleValueChange(activeStockData.id, criterion.id, e.target.value)}
-                        placeholder="Enter value"
+                        placeholder="Masukkan nilai"
                         className="flex-1 px-4 md:px-3 sm:px-3 py-3 md:py-2 sm:py-2 text-sm md:text-xs sm:text-xs border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary"
                       />
                       <span className="text-sm md:text-xs sm:text-xs text-text-secondary whitespace-nowrap">
@@ -263,13 +341,13 @@ const StockDataInputStep = ({ criteria, onNext, onBack }: StockDataInputStepProp
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-muted text-text-primary font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:bg-muted/80 transition-smooth"
         >
           <Icon name="ArrowLeftIcon" size={18} />
-          <span>Back to Weights</span>
+          <span>Kembali ke Penetapan Bobot</span>
         </button>
         <button
           onClick={handleNext}
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 transition-smooth shadow-md"
         >
-          <span>Calculate Results</span>
+          <span>Hitung Hasil</span>
           <Icon name="ArrowRightIcon" size={18} />
         </button>
       </div>

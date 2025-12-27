@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/index.css';
+import ClientProviders from '../components/ClientProviders';
 
 export const viewport = {
   width: 'device-width',
@@ -23,10 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}
+      <body>
+        <ClientProviders>{children}</ClientProviders>
 
         <script type="module" async src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fstockwise2599back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.12" />
-        <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2" /></body>
+        <script type="module" defer src="https://static.rocket.new/rocket-shot.js?v=0.0.2" />
+      </body>
     </html>
   );
 }

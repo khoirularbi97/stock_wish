@@ -20,6 +20,25 @@ const Header = () => {
     setIsHydrated(true);
   }, []);
 
+  // Menu UI state
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+  const toggleMoreMenu = () => setIsMoreMenuOpen((v) => !v);
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => setIsMobileMenuOpen((v) => !v);
+
+  // Navigation items (define here to avoid ReferenceError)
+  const primaryNavItems = [
+    { href: '/interactive-dashboard', label: 'Dasbor', icon: 'ChartBarIcon' },
+    { href: '/comparison-matrix', label: 'Bandingkan', icon: 'Squares2X2Icon' },
+    { href: '/results-visualization', label: 'Visualisasi', icon: 'ChartPieIcon' },
+  ];
+
+  const secondaryNavItems = [
+    { href: '/stock-analyzer', label: 'Analyzer', icon: 'Cog6ToothIcon' },
+    { href: '/user-workspace', label: 'Workspace', icon: 'UserCircleIcon' },
+  ];
+
   const handleLogout = async () => {
     try {
       setAuthError('');
@@ -105,7 +124,7 @@ const Header = () => {
             href="/stock-analyzer"
             className="px-5 py-2 bg-brand-cta text-white font-semibold text-sm rounded-md hover:opacity-90 transition-smooth shadow-sm"
           >
-            Start Analysis
+            Mulai Analisis
           </Link>
         </div>
 
@@ -155,7 +174,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex items-center justify-center w-full px-5 py-3 bg-brand-cta text-white font-semibold text-sm rounded-md hover:opacity-90 transition-smooth shadow-sm"
               >
-                Start Analysis
+                Mulai Analisis
               </Link>
             </div>
           </nav>
@@ -172,7 +191,7 @@ const Header = () => {
               onClick={handleLogout}
               className="px-4 py-2 text-sm font-medium text-white bg-brand-primary rounded-lg hover:opacity-90 transition-opacity"
             >
-              Sign Out
+              Keluar
             </button>
           </>
         ) : (
@@ -181,13 +200,13 @@ const Header = () => {
               onClick={() => router.push('/login')}
               className="px-4 py-2 text-sm font-medium text-text-primary hover:text-brand-primary transition-colors"
             >
-              Sign In
+              Masuk
             </button>
             <button
               onClick={() => router.push('/register')}
               className="px-4 py-2 text-sm font-medium text-white bg-brand-primary rounded-lg hover:opacity-90 transition-opacity"
             >
-              Sign Up
+              Daftar
             </button>
           </>
         )}

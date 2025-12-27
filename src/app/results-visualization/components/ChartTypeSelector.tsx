@@ -17,10 +17,10 @@ interface ChartTypeSelectorProps {
 
 const ChartTypeSelector = ({ selectedType, onTypeChange }: ChartTypeSelectorProps) => {
   const chartTypes: ChartType[] = [
-    { id: 'bar', name: 'Bar Chart', icon: 'ChartBarIcon', description: 'Compare values across categories' },
-    { id: 'line', name: 'Line Chart', icon: 'ChartBarSquareIcon', description: 'Show trends over time' },
-    { id: 'radar', name: 'Radar Chart', icon: 'CircleStackIcon', description: 'Multi-dimensional comparison' },
-    { id: 'scatter', name: 'Scatter Plot', icon: 'SparklesIcon', description: 'Correlation analysis' },
+  { id: 'bar', name: 'Diagram Batang', icon: 'ChartBarIcon', description: 'Bandingkan nilai antar kategori' },
+    { id: 'line', name: 'Diagram Garis', icon: 'ChartBarSquareIcon', description: 'Tampilkan tren dari waktu ke waktu' },
+    { id: 'radar', name: 'Diagram Radar', icon: 'CircleStackIcon', description: 'Perbandingan multi-dimensi' },
+    { id: 'scatter', name: 'Diagram Sebar', icon: 'SparklesIcon', description: 'Analisis korelasi' },
   ];
 
   return (

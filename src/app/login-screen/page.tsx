@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
@@ -18,7 +18,7 @@ export default function LoginScreen() {
     e.preventDefault();
     
     if (!email || !password) {
-      setError('Email and password are required');
+      setError('Email dan kata sandi diperlukan');
       return;
     }
 
@@ -29,9 +29,9 @@ export default function LoginScreen() {
       
       if (error) {
         if (error.message?.includes('Failed to fetch') || error.message?.includes('AuthRetryableFetchError')) {
-          setError('Cannot connect to authentication service. Your Supabase project may be paused or inactive. Please check your Supabase dashboard.');
+          setError('Tidak dapat terhubung ke layanan autentikasi. Proyek Supabase Anda mungkin dihentikan atau tidak aktif. Periksa dashboard Supabase Anda.');
         } else {
-          setError(error.message || 'Invalid email or password');
+          setError(error.message || 'Email atau kata sandi tidak valid');
         }
         return;
       }
@@ -40,12 +40,12 @@ export default function LoginScreen() {
     } catch (err) {
       if (err instanceof Error) {
         if (err.message?.includes('Failed to fetch') || err.message?.includes('NetworkError')) {
-          setError('Cannot connect to server. Please check your connection and try again.');
+          setError('Tidak dapat terhubung ke server. Periksa koneksi Anda dan coba lagi.');
         } else {
-          setError('An unexpected error occurred. Please try again.');
+          setError('Terjadi kesalahan tak terduga. Silakan coba lagi.');
         }
       } else {
-        setError('An unexpected error occurred. Please try again.');
+        setError('Terjadi kesalahan tak terduga. Silakan coba lagi.');
       }
     } finally {
       setLoading(false);
@@ -63,7 +63,7 @@ export default function LoginScreen() {
             </svg>
           </div>
           <h1 className="text-3xl font-bold text-gray-800 mb-2">StockWise Analytics</h1>
-          <p className="text-gray-600">Welcome back! Sign in to access your workspace</p>
+          <p className="text-gray-600">Selamat datang kembali! Masuk untuk mengakses ruang kerja Anda</p>
         </div>
 
         {/* Login Card */}
@@ -73,7 +73,7 @@ export default function LoginScreen() {
             <svg className="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
             </svg>
-            <span>Secure SSL Connection</span>
+            <span>Koneksi SSL Aman</span>
           </div>
 
           {/* Error Alert */}
@@ -93,7 +93,7 @@ export default function LoginScreen() {
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address
+                Alamat Email
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -106,7 +106,7 @@ export default function LoginScreen() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your.email@example.com"
+                  placeholder="email.anda@contoh.com"
                   className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] focus:border-transparent transition-all"
                   required
                   disabled={loading}
@@ -117,7 +117,7 @@ export default function LoginScreen() {
             {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-2">
-                Password
+                Kata Sandi
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -130,7 +130,7 @@ export default function LoginScreen() {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder="Masukkan kata sandi Anda"
                   className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-300 bg-gray-50 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#2E8B57] focus:border-transparent transition-all"
                   required
                   disabled={loading}
@@ -165,13 +165,13 @@ export default function LoginScreen() {
                   className="w-4 h-4 text-[#2E8B57] border-gray-300 rounded focus:ring-[#2E8B57] cursor-pointer"
                   disabled={loading}
                 />
-                <span className="ml-2 text-sm text-gray-700">Remember me</span>
+                <span className="ml-2 text-sm text-gray-700">Ingat saya</span>
               </label>
               <Link 
                 href="/forgot-password" 
                 className="text-sm text-[#2E8B57] hover:text-[#256d47] font-semibold transition-colors"
               >
-                Forgot Password?
+                Lupa Kata Sandi?
               </Link>
             </div>
 
@@ -187,10 +187,10 @@ export default function LoginScreen() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span>Signing In...</span>
+                  <span>Masuk...</span>
                 </>
               ) : (
-                <span>Sign In</span>
+                <span>Masuk</span>
               )}
             </button>
           </form>
@@ -201,7 +201,7 @@ export default function LoginScreen() {
               <div className="w-full border-t border-gray-300"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">New to StockWise?</span>
+              <span className="px-4 bg-white text-gray-500">Baru di StockWise?</span>
             </div>
           </div>
 
@@ -211,7 +211,7 @@ export default function LoginScreen() {
               href="/register" 
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#2E8B57] hover:text-[#256d47] transition-colors"
             >
-              Create Account
+              Buat Akun
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
@@ -223,15 +223,15 @@ export default function LoginScreen() {
         <div className="mt-8 text-center">
           <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
             <Link href="/privacy-policy" className="hover:text-[#2E8B57] transition-colors">
-              Privacy Policy
+              Kebijakan Privasi
             </Link>
             <span className="text-gray-400">•</span>
             <Link href="/terms-of-service" className="hover:text-[#2E8B57] transition-colors">
-              Terms of Service
+              Ketentuan Layanan
             </Link>
             <span className="text-gray-400">•</span>
             <Link href="/help" className="hover:text-[#2E8B57] transition-colors">
-              Help Center
+              Pusat Bantuan
             </Link>
           </div>
         </div>

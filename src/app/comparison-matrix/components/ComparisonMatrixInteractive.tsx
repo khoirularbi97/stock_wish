@@ -230,7 +230,7 @@ export default function ComparisonMatrixInteractive() {
 
   const handleExportPDF = () => {
     if (!isHydrated) return;
-    alert('PDF export functionality would generate a detailed report with charts and analysis.');
+    alert('Fungsionalitas ekspor PDF akan menghasilkan laporan terperinci berisi grafik dan analisis.');
   };
 
   if (!isHydrated) {
@@ -256,18 +256,18 @@ export default function ComparisonMatrixInteractive() {
               <Icon name="TableCellsIcon" size={28} className="text-brand-primary" />
             </div>
             <div>
-              <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary">
-                Comparison Matrix
-              </h1>
-              <p className="text-text-secondary mt-1">
-                Multi-stock comparison with customizable criteria weighting
-              </p>
+                <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary">
+                  Matriks Perbandingan
+                </h1>
+                <p className="text-text-secondary mt-1">
+                  Perbandingan beberapa saham dengan penetapan bobot kriteria yang dapat disesuaikan
+                </p>
             </div>
           </div>
         </div>
 
         <div className="bg-surface border border-border rounded-lg p-8 md:p-6 sm:p-4">
-          <h2 className="text-xl font-semibold text-text-primary mb-6">Select Stocks to Compare</h2>
+          <h2 className="text-xl font-semibold text-text-primary mb-6">Pilih Saham untuk Dibandingkan</h2>
           <StockSelector
             availableStocks={availableStocks}
             selectedStocks={selectedStocks}
@@ -305,7 +305,7 @@ export default function ComparisonMatrixInteractive() {
                 </div>
 
                 <div className="bg-surface border border-border rounded-lg p-8 md:p-6 sm:p-4">
-                  <h2 className="text-xl font-semibold text-text-primary mb-6">Detailed Comparison</h2>
+                  <h2 className="text-xl font-semibold text-text-primary mb-6">Perbandingan Rinci</h2>
                   <ComparisonTable
                     comparisons={comparisons}
                     criteria={criteria}
@@ -318,16 +318,16 @@ export default function ComparisonMatrixInteractive() {
                   <div className="flex items-start gap-4">
                     <Icon name="InformationCircleIcon" size={24} className="text-accent flex-shrink-0 mt-1" />
                     <div className="space-y-2">
-                      <h3 className="font-semibold text-text-primary">Analysis Methodology</h3>
-                      <p className="text-sm text-text-secondary">
-                        This comparison uses a hybrid AHP-SAW methodology. Scores are normalized across all selected stocks, then weighted according to your criteria preferences. The total score represents the weighted sum of all normalized criteria values.
-                      </p>
-                      <ul className="text-sm text-text-secondary space-y-1 ml-4 list-disc">
-                        <li>Raw scores show actual financial metric values</li>
-                        <li>Normalized scores are scaled 0-100 relative to selected stocks</li>
-                        <li>Weighted scores apply your custom criteria weights</li>
-                        <li>Heat map colors indicate relative performance within each criterion</li>
-                      </ul>
+                        <h3 className="font-semibold text-text-primary">Metodologi Analisis</h3>
+                        <p className="text-sm text-text-secondary">
+                          Perbandingan ini menggunakan metodologi hibrida AHP-SAW. Skor dinormalisasi di antara semua saham yang dipilih, lalu dibobot sesuai preferensi kriteria Anda. Skor total merupakan jumlah tertimbang dari semua nilai kriteria yang telah dinormalisasi.
+                        </p>
+                        <ul className="text-sm text-text-secondary space-y-1 ml-4 list-disc">
+                          <li>Nilai mentah menunjukkan nilai metrik keuangan aktual</li>
+                          <li>Skor dinormalisasi diskalakan 0-100 relatif terhadap saham yang dipilih</li>
+                          <li>Skor tertimbang menerapkan bobot kriteria kustom Anda</li>
+                          <li>Warna heat map menunjukkan kinerja relatif dalam setiap kriteria</li>
+                        </ul>
                     </div>
                   </div>
                 </div>

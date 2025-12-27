@@ -37,10 +37,10 @@ const DashboardInteractive = () => {
         {/* Header Section */}
         <div className="mb-8 md:mb-6 sm:mb-4">
           <h1 className="text-4xl md:text-3xl sm:text-2xl font-bold text-text-primary mb-3 md:mb-2 sm:mb-2">
-            Interactive Dashboard
+            Dasbor Interaktif
           </h1>
           <p className="text-lg md:text-base sm:text-sm text-text-secondary line-clamp-2">
-            Real-time analytics center with comprehensive portfolio tracking and market insights
+            Pusat analitik waktu-nyata dengan pelacakan portofolio lengkap dan wawasan pasar
           </p>
         </div>
 
@@ -68,10 +68,10 @@ const DashboardInteractive = () => {
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 md:gap-3 sm:gap-2">
             <div className="flex-1 min-w-0">
               <h3 className="text-base md:text-sm sm:text-xs font-semibold text-text-primary mb-2 md:mb-1">
-                Dashboard Information
+                Informasi Dasbor
               </h3>
               <p className="text-sm md:text-xs text-text-secondary line-clamp-2">
-                All data is updated in real-time. Analysis calculations use the hybrid AHP-SAW methodology for accurate decision support.
+                Semua data diperbarui secara waktu-nyata. Perhitungan analisis menggunakan metodologi hibrida AHP-SAW untuk mendukung pengambilan keputusan yang akurat.
               </p>
             </div>
             <div className="flex-shrink-0 text-xs text-text-secondary whitespace-nowrap">

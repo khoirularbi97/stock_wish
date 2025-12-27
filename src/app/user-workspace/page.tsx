@@ -3,38 +3,38 @@ import Header from '@/components/common/Header';
 import WorkspaceInteractive from './components/WorkspaceInteractive';
 
 export const metadata: Metadata = {
-  title: 'User Workspace - StockWise Analytics',
-  description: 'Manage your saved analyses, custom criteria sets, and portfolio tracking in your personalized workspace dashboard.'
+  title: 'Ruang Kerja Pengguna - StockWise Analytics',
+  description: 'Kelola analisis tersimpan, set kriteria kustom, dan pelacakan portofolio Anda di dasbor terpusat.'
 };
 
 export default function UserWorkspacePage() {
   const stats = [
-  {
+    {
     icon: 'DocumentTextIcon',
-    label: 'Saved Analyses',
+    label: 'Analisis Tersimpan',
     value: '24',
-    change: '+3 this week',
+    change: '+3 minggu ini',
     trend: 'up' as const
   },
   {
     icon: 'AdjustmentsHorizontalIcon',
-    label: 'Custom Criteria',
+    label: 'Kriteria Kustom',
     value: '8',
-    change: '+2 new',
+    change: '+2 baru',
     trend: 'up' as const
   },
   {
     icon: 'ChartBarIcon',
-    label: 'Tracked Stocks',
+    label: 'Saham Terpantau',
     value: '12',
-    change: 'No change',
+    change: 'Tidak ada perubahan',
     trend: 'up' as const
   },
   {
     icon: 'BellAlertIcon',
-    label: 'Active Alerts',
+    label: 'Peringatan Aktif',
     value: '5',
-    change: '-1 resolved',
+    change: '-1 terselesaikan',
     trend: 'down' as const
   }];
 
@@ -187,70 +187,70 @@ export default function UserWorkspacePage() {
   {
     id: '1',
     type: 'analysis' as const,
-    title: 'New Analysis Completed',
-    description: 'ANTM stock analysis with 5 criteria completed successfully',
-    timestamp: '2 hours ago',
+  title: 'Analisis Baru Selesai',
+  description: 'Analisis saham ANTM dengan 5 kriteria berhasil diselesaikan',
+  timestamp: '2 jam yang lalu',
     icon: 'DocumentTextIcon'
   },
   {
     id: '2',
     type: 'export' as const,
-    title: 'Report Exported',
-    description: 'BBCA comparative analysis exported to PDF',
-    timestamp: '5 hours ago',
+  title: 'Laporan Diekspor',
+  description: 'Analisis perbandingan BBCA diekspor ke PDF',
+  timestamp: '5 jam yang lalu',
     icon: 'ArrowDownTrayIcon'
   },
   {
     id: '3',
     type: 'criteria' as const,
-    title: 'Criteria Set Updated',
-    description: 'Modified weights for Financial Stability criteria set',
-    timestamp: '1 day ago',
+  title: 'Set Kriteria Diperbarui',
+  description: 'Mengubah bobot untuk set kriteria Stabilitas Keuangan',
+  timestamp: '1 hari yang lalu',
     icon: 'AdjustmentsHorizontalIcon'
   },
   {
     id: '4',
     type: 'alert' as const,
-    title: 'Price Alert Triggered',
-    description: 'TLKM reached target price of Rp 3,800',
-    timestamp: '1 day ago',
+  title: 'Peringatan Harga Tercapai',
+  description: 'TLKM mencapai harga target Rp 3.800',
+  timestamp: '1 hari yang lalu',
     icon: 'BellAlertIcon'
   },
   {
     id: '5',
     type: 'analysis' as const,
-    title: 'Comparison Analysis',
-    description: 'ANTM vs BBCA vs TLKM comparison completed',
-    timestamp: '2 days ago',
+  title: 'Analisis Perbandingan',
+  description: 'Perbandingan ANTM vs BBCA vs TLKM selesai',
+  timestamp: '2 hari yang lalu',
     icon: 'TableCellsIcon'
   }];
 
 
   const actions = [
   {
-    label: 'New Analysis',
-    description: 'Start a fresh stock analysis with AHP-SAW methodology',
+    label: 'Analisis Baru',
+    description: 'Mulai analisis saham baru menggunakan metode AHP-SAW',
     icon: 'PlusCircleIcon',
     href: '/stock-analyzer',
     color: 'bg-primary/10 text-primary'
   },
   {
-    label: 'Compare Stocks',
+  label: 'Bandingkan Saham',
     description: 'Run side-by-side comparison of multiple stocks',
     icon: 'ArrowsRightLeftIcon',
     href: '/comparison-matrix',
     color: 'bg-accent/10 text-accent'
   },
   {
-    label: 'View Dashboard',
-    description: 'Access your analytics dashboard with real-time data',
+  label: 'Lihat Dasbor',
+  description: 'Akses dasbor analitik Anda dengan data real-time',
     icon: 'ChartBarIcon',
     href: '/interactive-dashboard',
     color: 'bg-success/10 text-success'
   },
   {
-    label: 'Results History',
-    description: 'Review past analysis results and visualizations',
+    label: 'Riwayat Hasil',
+    description: 'Tinjau hasil analisis dan visualisasi sebelumnya',
     icon: 'ClockIcon',
     href: '/results-visualization',
     color: 'bg-warning/10 text-warning'
@@ -264,9 +264,9 @@ export default function UserWorkspacePage() {
       <main className="pt-24 pb-16 md:pt-20 md:pb-12 sm:pt-20 sm:pb-8">
         <div className="max-w-full mx-auto px-8 md:px-6 sm:px-4">
           <div className="mb-8 md:mb-6 sm:mb-4">
-            <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary mb-2">User Workspace</h1>
+            <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary mb-2">Ruang Kerja</h1>
             <p className="text-base md:text-sm sm:text-xs text-text-secondary">
-              Manage your analyses, criteria sets, and portfolio tracking in one centralized dashboard
+              Kelola analisis, set kriteria, dan pelacakan portofolio Anda dalam satu dasbor terpusat
             </p>
           </div>
 

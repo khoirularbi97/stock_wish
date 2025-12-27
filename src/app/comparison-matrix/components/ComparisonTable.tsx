@@ -78,14 +78,14 @@ export default function ComparisonTable({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
           <button
             onClick={() => setViewMode('scores')}
             className={`px-4 py-2 text-sm font-medium rounded-lg transition-smooth ${
               viewMode === 'scores' ?'bg-brand-primary text-white' :'bg-muted text-text-secondary hover:bg-muted/80'
             }`}
           >
-            Raw Scores
+            Nilai Mentah
           </button>
           <button
             onClick={() => setViewMode('normalized')}
@@ -93,7 +93,7 @@ export default function ComparisonTable({
               viewMode === 'normalized' ?'bg-brand-primary text-white' :'bg-muted text-text-secondary hover:bg-muted/80'
             }`}
           >
-            Normalized
+            Dinormalisasi
           </button>
           <button
             onClick={() => setViewMode('weighted')}
@@ -101,24 +101,24 @@ export default function ComparisonTable({
               viewMode === 'weighted' ?'bg-brand-primary text-white' :'bg-muted text-text-secondary hover:bg-muted/80'
             }`}
           >
-            Weighted
+            Tertimbang
           </button>
         </div>
 
-        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
           <button
             onClick={onExportCSV}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-muted rounded-lg transition-smooth"
           >
             <Icon name="DocumentArrowDownIcon" size={18} />
-            <span className="hidden sm:inline">Export CSV</span>
+            <span className="hidden sm:inline">Ekspor CSV</span>
           </button>
           <button
             onClick={onExportPDF}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-brand-cta text-white rounded-lg hover:opacity-90 transition-smooth"
           >
             <Icon name="DocumentTextIcon" size={18} />
-            <span className="hidden sm:inline">Export PDF</span>
+            <span className="hidden sm:inline">Ekspor PDF</span>
           </button>
         </div>
       </div>
@@ -128,11 +128,11 @@ export default function ComparisonTable({
           <thead className="bg-muted">
             <tr>
               <th className="px-6 py-4 text-left">
-                <button
+                  <button
                   onClick={() => setSortBy(sortBy === 'rank' ? 'symbol' : 'rank')}
                   className="flex items-center gap-2 font-semibold text-text-primary hover:text-brand-primary transition-smooth"
                 >
-                  <span>Stock</span>
+                  <span>Saham</span>
                   <Icon name="ArrowsUpDownIcon" size={16} />
                 </button>
               </th>
@@ -149,10 +149,10 @@ export default function ComparisonTable({
                 </th>
               ))}
               <th className="px-6 py-4 text-center">
-                <span className="font-semibold text-text-primary">Total Score</span>
+                <span className="font-semibold text-text-primary">Skor Total</span>
               </th>
               <th className="px-6 py-4 text-center">
-                <span className="font-semibold text-text-primary">Rank</span>
+                <span className="font-semibold text-text-primary">Peringkat</span>
               </th>
             </tr>
           </thead>
@@ -224,7 +224,7 @@ export default function ComparisonTable({
       <div className="flex items-center gap-2 text-sm text-text-secondary mt-4">
         <Icon name="InformationCircleIcon" size={18} />
         <span>
-          Heat map colors indicate relative performance: Green (highest) to Red (lowest)
+          Warna heat map menunjukkan kinerja relatif: Hijau (tertinggi) sampai Merah (terendah)
         </span>
       </div>
     </div>

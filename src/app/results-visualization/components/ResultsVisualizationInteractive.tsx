@@ -135,17 +135,17 @@ const ResultsVisualizationInteractive = () => {
 
   const handleExportPDF = () => {
     if (!isHydrated) return;
-    alert('PDF export functionality would be implemented here. This would generate a comprehensive report with all charts and rankings.');
+    alert('Fungsionalitas ekspor PDF akan diimplementasikan di sini. Ini akan menghasilkan laporan komprehensif berisi semua grafik dan peringkat.');
   };
 
   const handleExportCSV = () => {
     if (!isHydrated) return;
-    alert('CSV export functionality would be implemented here. This would export the ranking data in spreadsheet format.');
+    alert('Fungsionalitas ekspor CSV akan diimplementasikan di sini. Ini akan mengekspor data peringkat dalam format spreadsheet.');
   };
 
   const handleShare = () => {
     if (!isHydrated) return;
-    alert('Share functionality would be implemented here. This would allow sharing analysis results via email or social media.');
+    alert('Fungsionalitas berbagi akan diimplementasikan di sini. Ini memungkinkan berbagi hasil analisis melalui email atau media sosial.');
   };
 
   const handleAddAnnotation = (text: string) => {
@@ -153,7 +153,7 @@ const ResultsVisualizationInteractive = () => {
     const newAnnotation: Annotation = {
       id: `ann-${Date.now()}`,
       text,
-      timestamp: new Date().toLocaleString('en-US', { 
+      timestamp: new Date().toLocaleString('id-ID', { 
         month: 'short', 
         day: 'numeric', 
         hour: '2-digit', 
@@ -196,8 +196,8 @@ const ResultsVisualizationInteractive = () => {
         <div className="mb-8 md:mb-6 sm:mb-4">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 md:gap-3 sm:gap-2 mb-6 md:mb-4 sm:mb-3">
             <div>
-              <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary mb-2 md:mb-1.5 sm:mb-1">Results Visualization</h1>
-              <p className="text-base md:text-sm sm:text-xs text-text-secondary">Interactive analysis of AHP-SAW stock rankings with comprehensive data visualization</p>
+              <h1 className="text-3xl md:text-2xl sm:text-xl font-bold text-text-primary mb-2 md:mb-1.5 sm:mb-1">Visualisasi Hasil</h1>
+              <p className="text-base md:text-sm sm:text-xs text-text-secondary">Analisis interaktif peringkat saham menggunakan metode hibrida AHP-SAW dengan visualisasi data komprehensif</p>
             </div>
             <div className="flex flex-wrap items-center gap-3 md:gap-2 sm:gap-1.5">
               <ExportControls
@@ -225,9 +225,9 @@ const ResultsVisualizationInteractive = () => {
                   <Icon name="ChartBarIcon" size={24} className="text-primary" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Top Performer</div>
+                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Performa Terbaik</div>
                   <div className="text-xl md:text-lg sm:text-base font-bold text-text-primary line-clamp-1">BBCA</div>
-                  <div className="text-sm md:text-xs text-success whitespace-nowrap">Score: 0.8547</div>
+                  <div className="text-sm md:text-xs text-success whitespace-nowrap">Skor: 0.8547</div>
                 </div>
               </div>
             </div>
@@ -238,9 +238,9 @@ const ResultsVisualizationInteractive = () => {
                   <Icon name="TrendingUpIcon" size={24} className="text-accent" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Biggest Gainer</div>
+                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Kenaikan Terbesar</div>
                   <div className="text-xl md:text-lg sm:text-base font-bold text-text-primary line-clamp-1">TLKM</div>
-                  <div className="text-sm md:text-xs text-success whitespace-nowrap">+1 Position</div>
+                  <div className="text-sm md:text-xs text-success whitespace-nowrap">+1 Posisi</div>
                 </div>
               </div>
             </div>
@@ -251,9 +251,9 @@ const ResultsVisualizationInteractive = () => {
                   <Icon name="ClockIcon" size={24} className="text-warning" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Analysis Period</div>
+                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Periode Analisis</div>
                   <div className="text-xl md:text-lg sm:text-base font-bold text-text-primary line-clamp-1">{selectedPeriod}</div>
-                  <div className="text-sm md:text-xs text-text-secondary whitespace-nowrap">Updated Today</div>
+                  <div className="text-sm md:text-xs text-text-secondary whitespace-nowrap">Diperbarui Hari Ini</div>
                 </div>
               </div>
             </div>
@@ -264,9 +264,9 @@ const ResultsVisualizationInteractive = () => {
                   <Icon name="DocumentChartBarIcon" size={24} className="text-success" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Stocks Analyzed</div>
+                  <div className="text-xs md:text-[10px] text-text-secondary mb-1">Saham Dianalisis</div>
                   <div className="text-xl md:text-lg sm:text-base font-bold text-text-primary whitespace-nowrap">3</div>
-                  <div className="text-sm md:text-xs text-text-secondary whitespace-nowrap">All Active</div>
+                  <div className="text-sm md:text-xs text-text-secondary whitespace-nowrap">Semua Aktif</div>
                 </div>
               </div>
             </div>
@@ -276,7 +276,7 @@ const ResultsVisualizationInteractive = () => {
         {/* Chart Controls */}
         <div className="mb-8 md:mb-6 sm:mb-4 space-y-6 md:space-y-4 sm:space-y-3">
           <div>
-            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary mb-4 md:mb-3 sm:mb-2">Chart Type</h2>
+            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary mb-4 md:mb-3 sm:mb-2">Jenis Grafik</h2>
             <ChartTypeSelector
               selectedType={selectedChartType}
               onTypeChange={setSelectedChartType}
@@ -284,7 +284,7 @@ const ResultsVisualizationInteractive = () => {
           </div>
 
           <div>
-            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary mb-4 md:mb-3 sm:mb-2">Time Period</h2>
+            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary mb-4 md:mb-3 sm:mb-2">Periode Waktu</h2>
             <TimePeriodFilter
               selectedPeriod={selectedPeriod}
               onPeriodChange={setSelectedPeriod}
@@ -299,14 +299,14 @@ const ResultsVisualizationInteractive = () => {
               data={barChartData.filter(d => 
                 comparisonStocks.find(s => s.symbol === d.label)?.visible
               )}
-              title="Stock Performance Comparison - AHP-SAW Scores"
+              title="Perbandingan Kinerja Saham - Skor AHP-SAW"
             />
           )}
 
           {selectedChartType === 'line' && (
             <LineChartVisualization
               data={lineChartData}
-              title="BBCA Performance Trend Over Time"
+              title="Tren Kinerja BBCA Sepanjang Waktu"
               color="#2E8B57"
             />
           )}
@@ -314,7 +314,7 @@ const ResultsVisualizationInteractive = () => {
           {selectedChartType === 'radar' && (
             <RadarChartVisualization
               data={radarChartData}
-              title="Multi-Criteria Analysis - BBCA"
+              title="Analisis Multi-Kriteria - BBCA"
               color="#2E8B57"
             />
           )}
@@ -324,9 +324,9 @@ const ResultsVisualizationInteractive = () => {
               data={scatterPlotData.filter(d => 
                 comparisonStocks.find(s => s.symbol === d.label)?.visible
               )}
-              title="Profitability vs Liquidity Correlation"
-              xLabel="Profitability Score"
-              yLabel="Liquidity Score"
+              title="Korelasi Profitabilitas vs Likuiditas"
+              xLabel="Skor Profitabilitas"
+              yLabel="Skor Likuiditas"
             />
           )}
         </div>
@@ -334,10 +334,10 @@ const ResultsVisualizationInteractive = () => {
         {/* Ranking Table */}
         <div className="mb-8 md:mb-6 sm:mb-4">
           <div className="flex items-center justify-between mb-4 md:mb-3 sm:mb-2">
-            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary">Stock Rankings</h2>
+            <h2 className="text-lg md:text-base sm:text-sm font-semibold text-text-primary">Peringkat Saham</h2>
             <div className="flex items-center gap-2 md:gap-1.5 text-sm md:text-xs text-text-secondary">
               <Icon name="InformationCircleIcon" size={16} />
-              <span className="hidden sm:inline">Click rows to expand details</span>
+              <span className="hidden sm:inline">Klik baris untuk melihat detail</span>
             </div>
           </div>
           <div className="bg-surface rounded-lg border border-border overflow-hidden">
@@ -350,9 +350,9 @@ const ResultsVisualizationInteractive = () => {
           <div className="flex items-start gap-3 md:gap-2">
             <Icon name="AcademicCapIcon" size={24} className="text-primary flex-shrink-0 mt-1" />
             <div className="flex-1 min-w-0">
-              <h3 className="text-base md:text-sm font-semibold text-text-primary mb-2 md:mb-1.5">About This Analysis</h3>
+              <h3 className="text-base md:text-sm font-semibold text-text-primary mb-2 md:mb-1.5">Tentang Analisis Ini</h3>
               <p className="text-sm md:text-xs text-text-secondary leading-relaxed">
-                These visualizations represent the results of our hybrid AHP-SAW methodology applied to Indonesian stock market data. The rankings combine weighted criteria analysis (AHP) with normalized performance scoring (SAW) to provide comprehensive investment decision support. All calculations are transparent and can be reviewed in detail through our methodology documentation.
+                Visualisasi ini menampilkan hasil metodologi hibrida AHP-SAW yang diterapkan pada data pasar saham Indonesia. Peringkat menggabungkan analisis bobot kriteria (AHP) dengan normalisasi skor kinerja (SAW) untuk memberikan dukungan pengambilan keputusan investasi yang komprehensif. Semua perhitungan transparan dan dapat ditinjau secara rinci melalui dokumentasi metodologi kami.
               </p>
             </div>
           </div>

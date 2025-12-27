@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useState, useEffect } from 'react';
 import Icon from '@/components/ui/AppIcon';
 import AppImage from '@/components/ui/AppImage';
@@ -49,10 +50,10 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
   const [expandedSection, setExpandedSection] = useState<string | null>('normalization');
 
   const steps = [
-    { id: 'normalization', name: 'Data Normalization', icon: 'AdjustmentsHorizontalIcon' },
-    { id: 'weighting', name: 'Weight Application', icon: 'ScaleIcon' },
-    { id: 'aggregation', name: 'Score Aggregation', icon: 'CalculatorIcon' },
-    { id: 'ranking', name: 'Final Ranking', icon: 'TrophyIcon' },
+    { id: 'normalization', name: 'Normalisasi Data', icon: 'AdjustmentsHorizontalIcon' },
+    { id: 'weighting', name: 'Penerapan Bobot', icon: 'ScaleIcon' },
+    { id: 'aggregation', name: 'Agregasi Skor', icon: 'CalculatorIcon' },
+    { id: 'ranking', name: 'Peringkat Akhir', icon: 'TrophyIcon' },
   ];
 
   useEffect(() => {
@@ -87,9 +88,9 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
         const isCost = criterion.id === 'der';
 
         if (isCost) {
-          normalizedValues[criterion.id] = min / stock.values[criterion.id];
+          normalizedValues[criterion.id] = min / (stock.values[criterion.id] || 1);
         } else {
-          normalizedValues[criterion.id] = stock.values[criterion.id] / max;
+          normalizedValues[criterion.id] = stock.values[criterion.id] / (max || 1);
         }
       });
 
@@ -160,10 +161,10 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
     <div className="w-full min-w-0 space-y-6 md:space-y-5 sm:space-y-4">
       <div>
         <h2 className="text-2xl md:text-xl sm:text-lg font-semibold text-text-primary">
-          AHP-SAW Calculation Process
+          Proses Perhitungan AHP-SAW
         </h2>
         <p className="text-sm md:text-xs text-text-secondary mt-1">
-          Step-by-step methodology visualization with detailed calculations
+          Visualisasi metodologi langkah demi langkah dengan perhitungan rinci
         </p>
       </div>
 
@@ -189,7 +190,7 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-text-secondary">Step {index + 1}</p>
+                <p className="text-xs text-text-secondary">Langkah {index + 1}</p>
                 <h3 className="text-sm md:text-xs sm:text-xs font-semibold text-text-primary truncate">
                   {step.name}
                 </h3>
@@ -210,10 +211,10 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
               <Icon name="AdjustmentsHorizontalIcon" size={24} className="text-brand-primary flex-shrink-0" />
               <div className="text-left">
                 <h3 className="text-base md:text-sm sm:text-sm font-semibold text-text-primary">
-                  Data Normalization
+                  Normalisasi Data
                 </h3>
                 <p className="text-xs text-text-secondary">
-                  Converting raw values to comparable scale (0-1)
+                  Mengubah nilai mentah ke skala yang dapat dibandingkan (0-1)
                 </p>
               </div>
             </div>
@@ -253,7 +254,7 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
                               <div className="w-8 h-8 md:w-6 md:h-6 sm:w-6 sm:h-6 rounded overflow-hidden flex-shrink-0">
                                 <AppImage
                                   src={stock?.logo || ''}
-                                  alt={`${stock?.name} company logo`}
+                                  alt={`${stock?.name} logo perusahaan`}
                                   className="w-full h-full object-cover"
                                 />
                               </div>
@@ -291,10 +292,10 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
                 <Icon name="TrophyIcon" size={24} className="text-brand-primary flex-shrink-0" />
                 <div className="text-left">
                   <h3 className="text-base md:text-sm sm:text-sm font-semibold text-text-primary">
-                    Final Rankings
+                    Peringkat Akhir
                   </h3>
                   <p className="text-xs text-text-secondary">
-                    Stocks ranked by SAW composite scores
+                    Saham diperingkat berdasarkan skor komposit SAW
                   </p>
                 </div>
               </div>
@@ -328,7 +329,7 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
                       <div className="w-12 h-12 md:w-10 md:h-10 sm:w-10 sm:h-10 rounded-lg overflow-hidden flex-shrink-0">
                         <AppImage
                           src={result.logo}
-                          alt={`${result.name} company logo`}
+                          alt={`${result.name} logo perusahaan`}
                           className="w-full h-full object-cover"
                         />
                       </div>
@@ -339,7 +340,7 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
                         <p className="text-xs text-text-secondary truncate">{result.name}</p>
                       </div>
                       <div className="text-right">
-                        <p className="text-xs text-text-secondary">SAW Score</p>
+                        <p className="text-xs text-text-secondary">Skor SAW</p>
                         <p className="text-lg md:text-base sm:text-sm font-bold text-brand-primary whitespace-nowrap">
                           {result.sawScore.toFixed(4)}
                         </p>
@@ -359,14 +360,14 @@ const CalculationProcessStep = ({ criteria, stocks, onComplete, onBack }: Calcul
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-muted text-text-primary font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:bg-muted/80 transition-smooth"
         >
           <Icon name="ArrowLeftIcon" size={18} />
-          <span>Back to Data Input</span>
+          <span>Kembali ke Input Data</span>
         </button>
         <button
           onClick={handleComplete}
           disabled={currentStep < steps.length - 1}
           className="flex items-center justify-center gap-2 px-6 md:px-5 sm:px-4 py-3 md:py-2 sm:py-2 bg-brand-cta text-white font-semibold text-sm md:text-xs sm:text-xs rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-smooth shadow-md"
         >
-          <span>View Detailed Results</span>
+          <span>Lihat Hasil Rinci</span>
           <Icon name="ArrowRightIcon" size={18} />
         </button>
       </div>

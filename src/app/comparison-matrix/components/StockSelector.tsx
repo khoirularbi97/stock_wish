@@ -57,7 +57,7 @@ export default function StockSelector({
             <button
               onClick={() => onStockRemove(stock.id)}
               className="p-1 hover:bg-error/10 rounded transition-smooth"
-              aria-label={`Remove ${stock.symbol}`}
+              aria-label={`Hapus ${stock.symbol}`}
             >
               <Icon name="XMarkIcon" size={16} className="text-error" />
             </button>
@@ -81,7 +81,7 @@ export default function StockSelector({
                 setIsDropdownOpen(true);
               }}
               onFocus={() => setIsDropdownOpen(true)}
-              placeholder="Search stocks by symbol or name..."
+              placeholder="Cari saham berdasarkan simbol atau nama..."
               className="w-full pl-10 pr-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-smooth"
             />
           </div>
@@ -95,14 +95,14 @@ export default function StockSelector({
                   className="w-full px-4 py-3 text-left hover:bg-muted transition-smooth border-b border-border last:border-b-0"
                 >
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="font-semibold text-text-primary">{stock.symbol}</div>
-                      <div className="text-sm text-text-secondary">{stock.name}</div>
+                      <div>
+                        <div className="font-semibold text-text-primary">{stock.symbol}</div>
+                        <div className="text-sm text-text-secondary">{stock.name}</div>
+                      </div>
+                      <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded">
+                        {stock.sector}
+                      </span>
                     </div>
-                    <span className="text-xs px-2 py-1 bg-accent/10 text-accent rounded">
-                      {stock.sector}
-                    </span>
-                  </div>
                 </button>
               ))}
             </div>
@@ -111,7 +111,7 @@ export default function StockSelector({
       )}
 
       <div className="mt-2 text-sm text-text-secondary">
-        {selectedStocks.length} of {maxSelections} stocks selected
+        Terpilih {selectedStocks.length} dari {maxSelections} saham
       </div>
     </div>
   );
