@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
 import Link from 'next/link';
+import { getAuthErrorMessage, isSupabaseConfigError } from '../../lib/utils/errorHandling';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,25 +21,13 @@ export default function LoginPage() {
       const { error } = await signIn(email, password);
       
       if (error) {
-        // Provide more helpful error messages
-        if (error.message === 'Failed to fetch') {
-          setError('Tidak dapat terhubung ke server. Pastikan Supabase sudah dikonfigurasi dengan benar. Silakan cek file .env.local Anda.');
-        } else if (error.message.includes('Invalid login credentials')) {
-          setError('Email atau password salah. Silakan coba lagi.');
-        } else {
-          setError(error.message);
-        }
+        setError(getAuthErrorMessage(error));
         return;
       }
       
       router.push('/interactive-dashboard');
     } catch (err) {
-      // Handle network errors
-      if (err instanceof TypeError && err.message === 'Failed to fetch') {
-        setError('Tidak dapat terhubung ke server. Pastikan Supabase sudah dikonfigurasi dengan benar. Silakan cek file .env.local Anda dan pastikan URL Supabase valid.');
-      } else {
-        setError(err instanceof Error ? err.message : 'Terjadi kesalahan saat login');
-      }
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -62,7 +51,7 @@ export default function LoginPage() {
                 </div>
                 <div className="ml-3">
                   <p className="text-sm text-red-800 font-medium">{error}</p>
-                  {error.includes('Supabase') && (
+                  {isSupabaseConfigError(error) && (
                     <p className="mt-2 text-xs text-red-600">
                       Lihat{' '}
                       <a 
