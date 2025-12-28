@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
 import Link from 'next/link';
+import { getAuthErrorMessage, isSupabaseConfigError } from '../../lib/utils/errorHandling';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -18,12 +19,12 @@ export default function RegisterPage() {
     e.preventDefault();
     
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('Password tidak cocok. Silakan coba lagi.');
       return;
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError('Password harus minimal 6 karakter.');
       return;
     }
 
@@ -33,13 +34,13 @@ export default function RegisterPage() {
       const { error } = await signUp(email, password, fullName);
       
       if (error) {
-        setError(error.message);
+        setError(getAuthErrorMessage(error));
         return;
       }
       
       router.push('/interactive-dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -50,19 +51,42 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="bg-card rounded-xl border border-border shadow-lg p-8">
           <h1 className="text-2xl font-bold text-text-primary mb-6 text-center">
-            Create Your Account
+            Buat Akun Baru
           </h1>
           
           {error && (
-            <div className="mb-4 p-3 rounded bg-red-50 border border-red-200 text-red-600 text-sm">
-              {error}
+            <div className="mb-4 p-4 rounded-lg bg-red-50 border border-red-200">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-800 font-medium">{error}</p>
+                  {isSupabaseConfigError(error) && (
+                    <p className="mt-2 text-xs text-red-600">
+                      Lihat{' '}
+                      <a 
+                        href="https://github.com/khoirularbi97/stock_wish/blob/main/README.md" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="underline hover:text-red-800"
+                      >
+                        panduan setup
+                      </a>
+                      {' '}untuk konfigurasi Supabase.
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-text-primary mb-2">
-                Full Name
+                Nama Lengkap
               </label>
               <input
                 type="text"
@@ -105,7 +129,7 @@ export default function RegisterPage() {
 
             <div>
               <label className="block text-sm font-medium text-text-primary mb-2">
-                Confirm Password
+                Konfirmasi Password
               </label>
               <input
                 type="password"
@@ -123,15 +147,15 @@ export default function RegisterPage() {
               disabled={loading}
               className="w-full py-3 px-4 bg-brand-primary text-white rounded-lg font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Creating account...' : 'Sign Up'}
+              {loading ? 'Mendaftar...' : 'Daftar'}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-text-secondary">
-              Already have an account?{' '}
+              Sudah punya akun?{' '}
               <Link href="/login" className="text-brand-primary hover:underline font-semibold">
-                Sign In
+                Masuk
               </Link>
             </p>
           </div>

@@ -3,6 +3,7 @@ import { useState, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../contexts/AuthContext';
 import Link from 'next/link';
+import { getAuthErrorMessage, isSupabaseConfigError } from '../../lib/utils/errorHandling';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,13 +21,13 @@ export default function LoginPage() {
       const { error } = await signIn(email, password);
       
       if (error) {
-        setError(error.message);
+        setError(getAuthErrorMessage(error));
         return;
       }
       
       router.push('/interactive-dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(getAuthErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -41,8 +42,31 @@ export default function LoginPage() {
           </h1>
           
           {error && (
-            <div className="mb-4 p-3 rounded bg-red-50 border border-red-200 text-red-600 text-sm">
-              {error}
+            <div className="mb-4 p-4 rounded-lg bg-red-50 border border-red-200">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-800 font-medium">{error}</p>
+                  {isSupabaseConfigError(error) && (
+                    <p className="mt-2 text-xs text-red-600">
+                      Lihat{' '}
+                      <a 
+                        href="https://github.com/khoirularbi97/stock_wish/blob/main/README.md" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="underline hover:text-red-800"
+                      >
+                        panduan setup
+                      </a>
+                      {' '}untuk konfigurasi Supabase.
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           )}
 
@@ -107,6 +131,18 @@ export default function LoginPage() {
                 <span className="text-text-primary font-mono">analyst@example.com / analyst123</span>
               </div>
             </div>
+            <p className="mt-3 text-xs text-text-secondary text-center">
+              <span className="font-medium">Catatan:</span> Demo credentials hanya akan berfungsi setelah{' '}
+              <a 
+                href="https://github.com/khoirularbi97/stock_wish/blob/main/README.md" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-brand-primary hover:underline"
+              >
+                Supabase dikonfigurasi
+              </a>
+              {' '}dan migrations dijalankan.
+            </p>
           </div>
         </div>
       </div>
