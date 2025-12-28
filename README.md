@@ -1,18 +1,20 @@
-# Next.js
+# Stock Analyzer - StockWise Analytics
 
-A modern Next.js 14 application built with TypeScript and Tailwind CSS.
+A modern Next.js 14 stock analysis application built with TypeScript, Tailwind CSS, and Supabase for authentication and data management.
 
 ## 🚀 Features
 
 - **Next.js 14** - Latest version with improved performance and features
 - **React 18** - Latest React version with enhanced capabilities
 - **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **Supabase** - Backend-as-a-Service for authentication and database
+- **Stock Analysis** - Comprehensive stock analysis and portfolio management tools
 
 ## 📋 Prerequisites
 
 - Node.js (v14.x or higher)
 - npm or yarn
-
+- A Supabase account and project ([Create one here](https://supabase.com))
 
 ## 🛠️ Installation
 
@@ -23,13 +25,47 @@ A modern Next.js 14 application built with TypeScript and Tailwind CSS.
   yarn install
   ```
 
-2. Start the development server:
+2. Set up Supabase:
+  
+  a. Create a new project on [Supabase](https://supabase.com)
+  
+  b. Copy `.env.example` to `.env.local`:
+  ```bash
+  cp .env.example .env.local
+  ```
+  
+  c. Update `.env.local` with your Supabase credentials:
+  ```env
+  NEXT_PUBLIC_SUPABASE_URL=https://your-project-ref.supabase.co
+  NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-public-key
+  ```
+  
+  You can find these values in your Supabase project settings under **Project Settings > API**.
+  
+  d. Run the database migrations:
+  ```bash
+  # Install Supabase CLI if you haven't already
+  npm install -g supabase
+  
+  # Link to your Supabase project
+  supabase link --project-ref your-project-ref
+  
+  # Run migrations
+  supabase db push
+  ```
+  
+  The migrations will create the necessary tables and seed demo users:
+  - **Investor**: investor@example.com / investor123
+  - **Analyst**: analyst@example.com / analyst123
+
+3. Start the development server:
   ```bash
   npm run dev
   # or
   yarn dev
   ```
-3. Open [http://localhost:4028](http://localhost:4028) with your browser to see the result.
+  
+4. Open [http://localhost:4028](http://localhost:4028) with your browser to see the result.
 
 ## 📁 Project Structure
 
